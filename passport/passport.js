@@ -7,7 +7,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  UserDAO.getById(id, (err, user) => {
+  UserDAO.findById(id, (err, user) => {
     done(err, user);
   });
 });
