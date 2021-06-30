@@ -1,19 +1,36 @@
 import passport from 'passport'
-import { Strategy as LocalStrategy } from 'passport-local'
-import UserDAO from '../models/userSchema.js'
+import { Strategy as FacebookStrategy } from 'passport-facebook'
 
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
+import dotenv from 'dotenv'
+dotenv.config()
 
-passport.deserializeUser((id, done) => {
-  UserDAO.findById(id, (err, user) => {
-    done(err, user);
-  });
-});
+const FACEBOOK_CLIENT_ID = process.env.FACEBOOK_CLIENT_ID
+const FACEBOOK_CLIENT_SECRET = process.env.FACEBOOK_CLIENT_SECRET
 
 
-passport.use('register', new LocalStrategy({
+passport.serializeUser((user, cb) => {
+  cb(null, user);
+})
+
+passport.deserializeUser((obj, cb) => {
+  cb(null, obj)
+})
+
+passport.use(new FacebookStrategy({
+  clientID: FACEBOOK_CLIENT_ID,
+  clientSecret: FACEBOOK_CLIENT_SECRET,
+  callbackURL: '/auth/facebook/callback',
+  profileFields: ['id', 'displayName', 'photos', 'emails'],
+  scope: ['email']
+}, function (accessToken, refreshToken, userProfile, done) {
+  console.log(userProfile)
+  return done(null, userProfile)
+}))
+
+export default passport
+
+
+/* passport.use('register', new LocalStrategy({
   usernameField: 'username',
   passwordField: 'password',
   passReqToCallback: true
@@ -57,6 +74,4 @@ passport.use('login', new LocalStrategy({
   } catch (error) {
     console.log(error)
   }
-}));
-
-export default passport
+})); */
