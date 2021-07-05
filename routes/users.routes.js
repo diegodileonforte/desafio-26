@@ -6,7 +6,6 @@ const usersRoutes = express.Router()
 const user = new User()
 
 usersRoutes.get('/auth/facebook', passport.authenticate('facebook'))
-
 usersRoutes.get('/auth/facebook/callback', passport.authenticate('facebook',{
     successRedirect: '/user/main',
     failureRedirect: '/user/login'

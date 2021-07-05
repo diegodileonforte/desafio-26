@@ -10,11 +10,18 @@ function validar() {
     if (mensaje === "" || user === "") {
         alert(`Compconstar todos los campos`)
     } else {
-        const nuevoMensaje = {
-            user: document.getElementById('userChat').value,
-            mensaje: document.getElementById('messageChat').value
+        let mensaje = {
+            author: {
+                email: document.getElementById('userChat').value,
+                nombre: document.getElementById('userName').value,
+                apellido: document.getElementById('userLastName').value,
+                edad: document.getElementById('userAge').value,
+                alias: document.getElementById('userAlias').value,
+                avatar: document.getElementById('userAvatar').value
+            },
+            text: document.getElementById('messageChat').value,
         }
-        socket.emit('new-message', nuevoMensaje);
+        socket.emit('new-message', mensaje);
         document.getElementById('messageChat').value = ""
     }
 }
@@ -34,9 +41,10 @@ function renderMessage(data) {
     const msgs = data.map((elem, i) => {
         return (`
         <div>
-        Usuario: <strong style="color:blue">${elem.user}</strong></span>
+        <img src="${elem.author.avatar}" alt="avatar" style="width:8%"/>
+        <strong style="color:blue">${elem.author.email}</strong></span>
         (a las <span>${newDate.toString()}</span>)
-        dijo: <i style="color:green">${elem.mensaje}</i></div>`);
+        dijo: <i style="color:green">${elem.text}</i></div>`)
     }).join(' ');
     document.getElementById('pantalla').innerHTML = msgs
 }
@@ -45,6 +53,17 @@ socket.on('new-message-server', (data) => {
     renderMessage(data)
 })
 
+const schemaAuthor = new normalizr.schema.Entity('author', {}, { idAttribute: 'id' });
+    const schemaMensaje = new normalizr.schema.Entity('mensaje', {
+        author: schemaAuthor
+    }, { idAttribute: '_id' })
+    const schemaMensajes = new normalizr.schema.Entity('mensajes', {
+        mensajes: [schemaMensaje]
+    }, { idAttribute: 'id' })
+
+    const msgDesnormalized = normalizr.denormalize(msgNormalized.result, schemaMensajes, msgNormalized.entities)
+
+    const msgDesnormalizedLength = JSON.stringify(msgDesnormalized).length
 
 document.getElementById('btnForm').addEventListener('click', () => { validarForm() })
 

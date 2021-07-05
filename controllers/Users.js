@@ -8,12 +8,12 @@ export default class User {
         res.render('login')
     }
 
-    main(req, res) {
+    async main(req, res) {
         res.render('main')
     }
 
     async logout(req, res) {
-        req.logout();
+        req.logout()
         res.redirect('/user/login')
     }
 }

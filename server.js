@@ -10,6 +10,9 @@ import('./passport/passport.js')
 import router from './routes/productos.routes.js'
 import routerMsg from './routes/mensajes.routes.js'
 import usersRoutes from './routes/users.routes.js'
+import infoRouter from './routes/info.routes.js';
+import randomsRouter from './routes/randoms.routes.js';
+
 import Mensaje from './controllers/Mensaje.js'
 import Producto from './controllers/Producto.js'
 const msg = new Mensaje()
@@ -51,6 +54,8 @@ app.set('view engine', 'ejs')
 app.use('/api/productos', router)
 app.use('/mensajes', routerMsg)
 app.use('/user', usersRoutes)
+app.use('/info', infoRouter)
+app.use('/randoms', randomsRouter)
 app.get('/', function (req, res) { res.render('login') })
 
 const chat = []

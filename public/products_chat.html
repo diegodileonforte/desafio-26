@@ -9,7 +9,7 @@
     integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
   <link rel="stylesheet" href="/css/style.css">
   <script src="/socket.io/socket.io.js"></script>
-  
+
 </head>
 
 <body>
@@ -79,6 +79,11 @@
       </div>
       <div>
         <input type="text" id="userChat" placeholder="E-mail" required>
+        <input type="text" id="userName" placeholder="Nombre" class="mt-1" required>
+        <input type="text" id="userLastName" placeholder="Apellido" class="mt-1" required>
+        <input type="number" id="userAge" placeholder="Edad" class="mt-1" required>
+        <input type="text" id="userAlias" placeholder="Alias" class="mt-1" required>
+        <input type="text" id="userAvatar" placeholder="Avatar (url)" class="mt-1" required>
         <input type="text" id="messageChat" placeholder="Mensaje" required>
         <button type="submit" id="btnChat" class="btn btn-primary btn-sm">Enviar</button>
       </div>
@@ -87,6 +92,7 @@
   </div>
 
   <script src="/js/client.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
 </body>
 
 </html>
