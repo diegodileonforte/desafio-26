@@ -1,3 +1,6 @@
+import * as os from 'os'
+const numCPUs = os.cpus().length;
+
 export default class Info {
 
     getInfo(req, res) {
@@ -9,7 +12,8 @@ export default class Info {
             memoria: process.memoryUsage(),
             path: process.execPath,
             proceso: process.pid,
-            carpeta: process.cwd()
+            carpeta: process.cwd(),
+            procesadores: numCPUs
         })
     }
 }

@@ -1,5 +1,7 @@
-import passport from 'passport'
-import { Strategy as FacebookStrategy } from 'passport-facebook'
+/* import passport from 'passport' */
+import passportFacebook from 'passport-facebook'
+
+const FacebookStrategy = passportFacebook.Strategy
 
 import dotenv from 'dotenv'
 dotenv.config()

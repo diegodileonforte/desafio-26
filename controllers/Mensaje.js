@@ -1,6 +1,7 @@
 import MensajeDAO from '../models/mensajeSchema.js'
 import mongoDBCnx from '../config/mongoDBCnx.js'
-import { normalize, schema, denormalize } from 'normalizr'
+import { normalize } from 'normalizr'
+import { schema } from 'normalizr'
 
 class Mensaje {
 
