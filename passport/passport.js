@@ -1,4 +1,4 @@
-/* import passport from 'passport' */
+import passport from 'passport'
 import passportFacebook from 'passport-facebook'
 
 const FacebookStrategy = passportFacebook.Strategy
@@ -10,24 +10,28 @@ const FACEBOOK_CLIENT_ID = process.env.FACEBOOK_CLIENT_ID
 const FACEBOOK_CLIENT_SECRET = process.env.FACEBOOK_CLIENT_SECRET
 
 
-passport.serializeUser((user, cb) => {
-  cb(null, user);
-})
-
-passport.deserializeUser((obj, cb) => {
-  cb(null, obj)
-})
-
 passport.use(new FacebookStrategy({
   clientID: FACEBOOK_CLIENT_ID,
   clientSecret: FACEBOOK_CLIENT_SECRET,
-  callbackURL: 'http://localhost:8080/user/auth/facebook/callback',
-  profileFields: ['id', 'displayName', 'photos', 'emails'],
-  scope: ['email']
-}, function (accessToken, refreshToken, userProfile, done) {
-  console.log(userProfile)
-  return done(null, userProfile)
-}))
+  callbackURL: 'http://localhost:8080/info'
+},
+  async (accessesToken, refreshhToken, profile, done) => {
+    const user = await UserService.find("dileonfortediego@gmail.com");
+    if (!user) {
+      return done(null, false);
+    }
+    return done(null, user);
+  }
+))
+
+passport.serializeUser((user, done) => {
+  done(null, user.username);
+})
+
+passport.deserializeUser(async (username, done) => {
+  const user = await UserService.find(username);
+  done(null, user);
+})
 
 export default passport
 

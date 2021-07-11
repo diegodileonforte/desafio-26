@@ -24,7 +24,7 @@ const prodClass = new Producto()
 const app = express()
 const httpServer = new HttpServer(app)
 const io = new IOServer(httpServer)
-const PORT = parseInt(process.argv[2]) || config.PORT || 5000;
+const PORT = parseInt(process.argv[2]) || 8080;
 
 app.use(cookieParser())
 app.use(session({
