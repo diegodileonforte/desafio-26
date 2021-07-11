@@ -1,4 +1,5 @@
 import ProductoDAO from '../models/productoSchema.js'
+import logger from '../config/winston.js'
 
 class Producto {
 
@@ -15,7 +16,7 @@ class Producto {
             await ProductoDAO.create(data)
 
         } catch (error) {
-            console.log(error)
+            logger.error.error(`Error en producto ${error.message}`)
         }
     }
 
@@ -25,7 +26,7 @@ class Producto {
             return res.status(200).json(prodInDb)
 
         } catch (error) {
-            return res.status(400).json({ mensaje: 'Ocurrió un error', error })
+            logger.error.error(`Error en producto ${error.message}`)
         }
     }
 
@@ -40,7 +41,7 @@ class Producto {
             return res.status(200).json(prodById)
 
         } catch (error) {
-            return res.status(400).json({ mensaje: 'Ocurrió un error', error })
+            logger.error.error(`Error en producto ${error.message}`)
         }
     }
 
@@ -54,7 +55,7 @@ class Producto {
             if (!prodToDel) { return res.status(404).json({ mensaje: 'Producto no encontrado' }) }
             return res.status(200).json({ mensaje: 'Producto eliminado con exito' })
         } catch (error) {
-            return res.status(400).json({ mensaje: 'Ocurrió un error', error })
+            logger.error.error(`Error en producto ${error.message}`)
         }
     }
 
@@ -65,7 +66,7 @@ class Producto {
             const prodUpdated = await ProductoDAO.updateOne({ id }, data, { new: true })
             return res.status(200).json({ prodUpdated, mensaje: 'Producto actualizado' })
         } catch (error) {
-            return res.status(400).json({ mensaje: 'Ocurrió un error', error })
+            logger.error.error(`Error en producto ${error.message}`)
         }
     }
 }

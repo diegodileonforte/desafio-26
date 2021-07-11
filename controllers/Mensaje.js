@@ -2,6 +2,7 @@ import MensajeDAO from '../models/mensajeSchema.js'
 import mongoDBCnx from '../config/mongoDBCnx.js'
 import { normalize } from 'normalizr'
 import { schema } from 'normalizr'
+import logger from '../config/winston.js'
 
 class Mensaje {
 
@@ -29,7 +30,7 @@ class Mensaje {
             await MensajeDAO.create(mensaje)
 
         } catch (error) {
-            console.log(error)
+            logger.error.error(`Error en mensaje ${error.message}`)
         }
     }
 
@@ -39,7 +40,7 @@ class Mensaje {
             let id = 'mensajes'
             return res.status(200).json({ id, mensajes });
         } catch (error) {
-            return res.status(400).json({ mensaje: 'Ocurrió un error', error })
+            logger.error.error(`Error en mensaje ${error.message}`)
         }
     }
 
@@ -68,7 +69,7 @@ class Mensaje {
             res.send(normalizedData)
 
         } catch (error) {
-            console.log(error)
+            logger.error.error(`Error en mensaje ${error.message}`)
         }
 
     }

@@ -1,4 +1,5 @@
 import { fork } from 'child_process'
+import logger from '../config/winston.js';
 
 export default class Random {
 
@@ -14,7 +15,7 @@ export default class Random {
             child.on('message', data => res.send(data));
             child.exit();
         } catch (error) {
-            console.log(error);
+            logger.error.error(`Error en randoms ${error.message}`)
         }
     }
 
