@@ -1,0 +1,6 @@
+2021/07/11 16:50:05 [error] 6112#9312: *1 CreateFile() "C:\Users\ddileonforte\Desktop\desafio-26\nginx/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost", referrer: "http://localhost/"
+2021/07/11 17:37:43 [error] 6112#9312: *3 CreateFile() "C:\Users\ddileonforte\Desktop\desafio-26\nginx/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost", referrer: "http://localhost/"
+2021/07/11 17:39:55 [notice] 9472#11916: signal process started
+2021/07/11 17:40:22 [notice] 3596#2232: signal process started
+2021/07/11 17:40:28 [notice] 11732#13144: signal process started
+2021/07/11 17:40:28 [error] 11732#13144: CreateFile() "C:\Users\ddileonforte\Desktop\desafio-26\nginx/logs/nginx.pid" failed (2: The system cannot find the file specified)
